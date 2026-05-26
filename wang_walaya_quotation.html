@@ -1223,9 +1223,9 @@ window.doLogin = async function(){
   }
 };
 
-window.doLogout = function(){
+window.doLogout = async function(){
   if(!confirm('ออกจากระบบใช่หรือไม่?')) return;
-  signOut(auth);
+  await signOut(auth);
 };
 
 onAuthStateChanged(auth, async user=>{
@@ -1239,6 +1239,14 @@ onAuthStateChanged(auth, async user=>{
     window.newDoc();
   } else {
     window._currentUser = null;
+    // reset login form
+    const emailEl=document.getElementById('login-email');
+    const passEl=document.getElementById('login-pass');
+    const btnEl=document.getElementById('login-btn');
+    const errEl=document.getElementById('login-err');
+    if(passEl) passEl.value='';
+    if(btnEl){btnEl.textContent='เข้าสู่ระบบ';btnEl.disabled=false;}
+    if(errEl) errEl.textContent='';
     document.getElementById('login-overlay').style.display='flex';
     document.getElementById('main-app').style.display='none';
   }
