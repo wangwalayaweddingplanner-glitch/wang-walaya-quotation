@@ -1,7 +1,714 @@
-WANG WALAYA
-WEDDING PLANNER
-อีเมล
-รหัสผ่าน
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใบเสนอราคา — WANG WALAYA Wedding Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#b8975a;
+  --gold-light:#e8d5a3;
+  --gold-dark:#8a6a30;
+  --rose:#c9a0a0;
+  --cream:#faf8f4;
+  --dark:#2c2318;
+  --mid:#5a4a36;
+  --soft:#9a8a78;
+}
+body{
+  font-family:'Sarabun',sans-serif;
+  background:#f0ece4;
+  color:var(--dark);
+  font-size:14px;
+  line-height:1.6;
+}
+.page-wrap{max-width:860px;margin:0 auto;padding:20px}
+.doc{
+  background:#fff;
+  box-shadow:0 4px 40px rgba(90,60,20,0.15);
+  position:relative;
+  overflow:hidden;
+}
+/* decorative border */
+.doc::before{
+  content:'';
+  position:absolute;
+  inset:10px;
+  border:1px solid var(--gold-light);
+  pointer-events:none;
+  z-index:0;
+}
+.doc-inner{position:relative;z-index:1;padding:36px 48px}
 
-เข้าสู่ระบบ
-ระบบใบเสนอราคา Wang Walaya
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding-bottom:20px;
+  border-bottom:2px solid var(--gold);
+  margin-bottom:24px;
+}
+.brand{flex:1}
+.brand-name{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  font-weight:600;
+  color:var(--gold-dark);
+  letter-spacing:.04em;
+  line-height:1.2;
+}
+.brand-sub{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--soft);
+  text-transform:uppercase;
+  margin-top:3px;
+}
+.brand-addr{
+  font-size:12px;
+  color:var(--mid);
+  margin-top:8px;
+  line-height:1.7;
+}
+.brand-addr span{color:var(--soft)}
+.doc-info{text-align:right;min-width:200px}
+.doc-title{
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-style:italic;
+  color:var(--gold-dark);
+  margin-bottom:10px;
+}
+.doc-title-th{
+  font-size:16px;
+  font-weight:600;
+  color:var(--dark);
+  font-style:normal;
+  font-family:'Sarabun',sans-serif;
+}
+.meta-row{display:flex;justify-content:flex-end;gap:8px;align-items:center;margin-bottom:5px;font-size:13px}
+.meta-row label{color:var(--soft);white-space:nowrap}
+.meta-row input{
+  border:none;
+  border-bottom:1px solid var(--gold-light);
+  background:transparent;
+  font-family:'Sarabun',sans-serif;
+  font-size:13px;
+  color:var(--dark);
+  text-align:right;
+  width:130px;
+  outline:none;
+  padding:1px 4px;
+}
+.meta-row input:focus{border-bottom-color:var(--gold)}
+
+/* CUSTOMER */
+.customer-section{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  background:var(--cream);
+  border:1px solid var(--gold-light);
+  border-radius:4px;
+  padding:16px 20px;
+  margin-bottom:24px;
+}
+.customer-section h3{
+  grid-column:1/-1;
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--gold-dark);
+  font-weight:600;
+  margin-bottom:4px;
+  display:flex;align-items:center;gap:8px;
+}
+.customer-section h3::after{content:'';flex:1;height:1px;background:var(--gold-light)}
+.field{display:flex;flex-direction:column;gap:3px}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;color:var(--soft);letter-spacing:.05em}
+.field input{
+  border:none;
+  border-bottom:1px solid #ddd;
+  background:transparent;
+  font-family:'Sarabun',sans-serif;
+  font-size:13.5px;
+  color:var(--dark);
+  outline:none;
+  padding:3px 2px;
+  width:100%;
+}
+.field input:focus{border-bottom-color:var(--gold)}
+
+/* ITEMS TABLE */
+.section-label{
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold-dark);font-weight:600;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--gold-light)}
+.items-table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:13px}
+.items-table thead tr{background:var(--gold-dark);color:#fff}
+.items-table thead th{padding:8px 10px;text-align:left;font-weight:500;font-size:12px;letter-spacing:.04em}
+.items-table thead th:nth-child(1){width:42px;text-align:center}
+.items-table thead th:nth-child(3){width:80px;text-align:center}
+.items-table thead th:nth-child(4){width:110px;text-align:right}
+.items-table thead th:nth-child(5){width:90px;text-align:center;padding-right:8px}
+.items-table tbody tr{border-bottom:1px solid #f0ece4}
+.items-table tbody tr:hover{background:#fdfbf8}
+.items-table td{padding:6px 8px;vertical-align:top}
+.items-table td:nth-child(1){text-align:center;color:var(--soft);font-size:12px;padding-top:10px}
+.items-table td input,.items-table td textarea{
+  width:100%;border:none;background:transparent;
+  font-family:'Sarabun',sans-serif;font-size:13px;color:var(--dark);
+  outline:none;padding:2px;resize:none;
+}
+.items-table td input:focus,.items-table td textarea:focus{
+  background:#fefdf8;border-radius:2px;
+}
+.items-table td.num input{text-align:center}
+.items-table td.price input{text-align:right}
+.items-table td.total{
+  text-align:right;font-weight:500;color:var(--dark);
+  padding-right:10px;font-size:13px;padding-top:10px;
+}
+.items-table td.act{text-align:center;padding-top:8px}
+.del-btn{
+  background:none;border:none;cursor:pointer;
+  color:#ccc;font-size:16px;padding:2px 4px;
+  border-radius:3px;line-height:1;
+}
+.del-btn:hover{color:#c00;background:#fee}
+/* image in row */
+.img-wrap{position:relative;display:inline-block;margin-top:4px}
+.row-img{max-width:80px;max-height:60px;border-radius:3px;border:1px solid var(--gold-light);display:block}
+.img-lbl{
+  display:inline-block;margin-top:4px;font-size:11px;
+  color:var(--soft);cursor:pointer;text-decoration:underline dotted;
+}
+.img-lbl:hover{color:var(--gold-dark)}
+.img-input{display:none}
+.add-row-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:none;border:1px dashed var(--gold-light);
+  color:var(--soft);font-family:'Sarabun',sans-serif;
+  font-size:12px;padding:6px 14px;border-radius:3px;
+  cursor:pointer;margin-bottom:16px;
+}
+.add-row-btn:hover{border-color:var(--gold);color:var(--gold-dark);background:#fdfbf4}
+
+/* SUMMARY */
+.summary-wrap{display:flex;justify-content:flex-end;margin-bottom:24px}
+.summary-box{min-width:280px;border:1px solid var(--gold-light);border-radius:4px;overflow:hidden}
+.sum-row{display:flex;justify-content:space-between;padding:7px 14px;font-size:13px}
+.sum-row:not(:last-child){border-bottom:1px solid #f5efe6}
+.sum-row label{color:var(--soft)}
+.sum-row span{font-weight:500;color:var(--dark)}
+.sum-total{background:var(--gold-dark);color:#fff!important}
+.sum-total label,.sum-total span{color:#fff!important;font-weight:600;font-size:14px}
+.sum-baht{font-size:13px;color:var(--mid);text-align:right;padding:6px 14px 0;font-style:italic}
+
+/* CONDITIONS */
+.conditions{
+  background:var(--cream);
+  border:1px solid var(--gold-light);
+  border-radius:4px;
+  padding:16px 20px;
+  margin-bottom:20px;
+  font-size:12.5px;
+  color:var(--mid);
+  line-height:1.9;
+}
+.conditions h4{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-dark);font-weight:600;margin-bottom:8px;
+}
+.conditions ol{padding-left:18px;margin:4px 0 10px}
+.conditions ol li{margin-bottom:3px}
+.cond-deposit-input{
+  border:none;border-bottom:1px solid var(--gold-light);
+  background:transparent;font-family:'Sarabun',sans-serif;
+  font-size:12.5px;color:var(--dark);outline:none;
+  width:90px;text-align:center;padding:0 4px;
+}
+.cond-deposit-input:focus{border-bottom-color:var(--gold)}
+
+/* PAYMENT TABLE */
+.pay-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px}
+.pay-table thead tr{background:var(--gold-dark);color:#fff}
+.pay-table thead th{padding:8px 12px;font-weight:500;font-size:12px;text-align:left}
+.pay-table tbody tr{border-bottom:1px solid #f0ece4}
+.pay-table tbody tr:hover{background:#fdfbf8}
+.pay-table td{padding:7px 10px}
+.pay-table td input,.pay-table td select{
+  border:none;border-bottom:1px solid #e5dfd6;
+  background:transparent;font-family:'Sarabun',sans-serif;
+  font-size:13px;color:var(--dark);outline:none;width:100%;padding:2px 4px;
+}
+.pay-table td input:focus,.pay-table td select:focus{border-bottom-color:var(--gold)}
+.pay-table td.computed{font-weight:500;color:var(--mid);font-size:13px}
+.status-paid{color:#2a7a2a;font-weight:500}
+.status-unpaid{color:#9a4a00;font-weight:500}
+
+/* PAYMENT CHANNELS */
+.pay-channels{
+  background:var(--cream);
+  border:1px solid var(--gold-light);
+  border-radius:4px;
+  padding:14px 20px;
+  margin-bottom:24px;
+  font-size:13px;
+  color:var(--mid);
+  line-height:2;
+}
+.pay-channels h4{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-dark);font-weight:600;margin-bottom:6px;
+}
+
+/* FOOTER */
+.doc-footer{
+  display:flex;justify-content:space-between;
+  border-top:1px solid var(--gold-light);
+  padding-top:16px;
+  margin-top:4px;
+}
+.sig-box{text-align:center;min-width:180px}
+.sig-line{
+  border-bottom:1px solid var(--gold-light);
+  height:40px;margin-bottom:6px;
+}
+.sig-label{font-size:12px;color:var(--soft)}
+.sig-date{font-size:12px;color:var(--soft);margin-top:2px}
+.sig-date input{
+  border:none;border-bottom:1px solid #ddd;background:transparent;
+  font-family:'Sarabun',sans-serif;font-size:12px;color:var(--dark);
+  outline:none;width:110px;padding:0 2px;
+}
+
+/* PRINT */
+@media print{
+  body{background:#fff}
+  .page-wrap{padding:0;max-width:100%}
+  .doc{box-shadow:none}
+  .print-btn,.add-row-btn,.del-btn,.img-lbl,.no-print{display:none!important}
+  .doc::before{display:none}
+  .doc-inner{padding:24px 36px}
+  input,textarea,select{pointer-events:none}
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;gap:12px;justify-content:flex-end;
+  padding:16px 0 0;
+}
+.print-btn{
+  background:var(--gold-dark);color:#fff;
+  border:none;padding:10px 28px;
+  font-family:'Sarabun',sans-serif;font-size:14px;font-weight:600;
+  border-radius:3px;cursor:pointer;letter-spacing:.04em;
+}
+.print-btn:hover{background:var(--gold)}
+.reset-btn{
+  background:none;border:1px solid var(--gold-light);color:var(--soft);
+  padding:10px 20px;font-family:'Sarabun',sans-serif;font-size:14px;
+  border-radius:3px;cursor:pointer;
+}
+.reset-btn:hover{border-color:var(--gold);color:var(--gold-dark)}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="controls no-print">
+  <button class="reset-btn" onclick="resetForm()">🔄 ล้างข้อมูล</button>
+  <button class="print-btn" onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF</button>
+</div>
+
+<div class="doc">
+<div class="doc-inner">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">
+    <div class="brand-name">WANG WALAYA</div>
+    <div class="brand-sub">Wedding Planner</div>
+    <div class="brand-addr">
+      118, 118/1-2 หมู่ 2 ตำบลควนกรด อำเภอทุ่งสง<br>
+      จังหวัดนครศรีธรรมราช 80110<br>
+      <span>โทร.</span> 095-425-2999
+    </div>
+  </div>
+  <div class="doc-info">
+    <div class="doc-title-th">ใบเสนอราคา</div>
+    <div class="doc-title">Quotation</div>
+    <div class="meta-row">
+      <label>เลขที่</label>
+      <input type="text" id="qt-no" placeholder="QA-……" oninput="saveData()">
+    </div>
+    <div class="meta-row">
+      <label>วันที่</label>
+      <input type="date" id="qt-date" oninput="saveData()">
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMER INFO -->
+<div class="customer-section">
+  <h3>ข้อมูลลูกค้า</h3>
+  <div class="field">
+    <label>ชื่อลูกค้า</label>
+    <input type="text" id="c-name" placeholder="ชื่อ-นามสกุล" oninput="saveData()">
+  </div>
+  <div class="field">
+    <label>เบอร์โทรศัพท์</label>
+    <input type="text" id="c-phone" placeholder="08x-xxx-xxxx" oninput="saveData()">
+  </div>
+  <div class="field full">
+    <label>ที่อยู่</label>
+    <input type="text" id="c-addr" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด" oninput="saveData()">
+  </div>
+  <div class="field">
+    <label>วันแต่งงาน</label>
+    <input type="date" id="c-wdate" oninput="saveData()">
+  </div>
+  <div class="field">
+    <label>สถานที่จัดงาน</label>
+    <input type="text" id="c-venue" placeholder="ชื่อสถานที่" oninput="saveData()">
+  </div>
+  <div class="field full">
+    <label>ช่วงเวลา</label>
+    <input type="text" id="c-time" placeholder="เช่น 09:00 – 14:00 น." oninput="saveData()">
+  </div>
+</div>
+
+<!-- ITEMS -->
+<div class="section-label">รายละเอียดรายการ</div>
+<table class="items-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>รายละเอียด</th>
+      <th>จำนวน</th>
+      <th>ราคา (บาท)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="items-body"></tbody>
+</table>
+<button class="add-row-btn" onclick="addRow()">+ เพิ่มรายการ</button>
+
+<!-- SUMMARY -->
+<div class="summary-wrap">
+  <div>
+    <div class="summary-box">
+      <div class="sum-row sum-total">
+        <label>ราคารวมทั้งหมด</label>
+        <span id="grand-total">0.00</span>
+      </div>
+    </div>
+    <div class="sum-baht" id="baht-text">ศูนย์บาทถ้วน</div>
+  </div>
+</div>
+
+<!-- CONDITIONS -->
+<div class="conditions">
+  <h4>เงื่อนไขการจอง เปลี่ยนแปลง / เลื่อนวัน และ/หรือ ยกเลิกการจัดงาน</h4>
+
+  <strong>กรณียกเลิกการจัดงาน</strong>
+  <ol>
+    <li>กรณีมัดจำจองคิวงาน <input type="text" class="cond-deposit-input" id="deposit-amt" value="20,000" oninput="calcPayments();saveData()"> บาท แล้วมีการยกเลิก หรือเปลี่ยนแปลง ทางร้านขอสงวนสิทธิ์ในการคืนเงินจำนวนดังกล่าว</li>
+    <li>กรณีลูกค้าชำระมัดจำแล้ว 50% ลูกค้าแจ้งยกเลิกงานก่อนวันงาน 90 วัน ทางร้านคืนเงินมัดจำให้ท่าน 25% จากจำนวนเงินที่ท่านมัดจำ 50% (ยอดที่ 2)</li>
+    <li>กรณีลูกค้ามัดจำแล้ว 50% ลูกค้าแจ้งยกเลิกงานก่อนวันงาน 30 วัน ทางร้านขอสงวนสิทธิ์ในการคืนเงินมัดจำทั้งหมด</li>
+  </ol>
+
+  <strong>กรณีมีการเพิ่มหน้างาน</strong>
+  <ol>
+    <li>ลูกค้าต้องแจ้งล่วงหน้าก่อนวันงาน 2 สัปดาห์ เนื่องจากของบางอย่างทางร้านต้องมีการเตรียมการล่วงหน้า</li>
+    <li>กรณีเพิ่มหน้างานหากทางร้านไม่สามารถหาให้ได้โดยทันเวลา ทางร้านขออนุญาตปฏิเสธ หรือมีค่าใช้จ่ายเพิ่มเติมตามความเป็นจริง</li>
+    <li>กรณีเพิ่มเติมนอกเหนือจากรายละเอียดในใบเสนอราคานี้ มีค่าใช้จ่ายเพิ่มเติม</li>
+  </ol>
+</div>
+
+<!-- PAYMENT SCHEDULE -->
+<div class="section-label">ประกอบการชำระเงิน</div>
+<table class="pay-table">
+  <thead>
+    <tr>
+      <th>ครั้งที่</th>
+      <th>รายการ</th>
+      <th>จำนวนเงิน (บาท)</th>
+      <th>กำหนดชำระ</th>
+      <th>สถานะ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>มัดจำจองคิว</td>
+      <td class="computed" id="p1-amt">—</td>
+      <td><input type="date" id="p1-date" oninput="saveData()"></td>
+      <td>
+        <select id="p1-status" onchange="saveData()">
+          <option value="">— เลือกสถานะ —</option>
+          <option value="paid">✅ ชำระแล้ว</option>
+          <option value="unpaid">⏳ รอชำระ</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>มัดจำ 50%</td>
+      <td class="computed" id="p2-amt">—</td>
+      <td><input type="date" id="p2-date" oninput="saveData()"></td>
+      <td>
+        <select id="p2-status" onchange="saveData()">
+          <option value="">— เลือกสถานะ —</option>
+          <option value="paid">✅ ชำระแล้ว</option>
+          <option value="unpaid">⏳ รอชำระ</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>ชำระส่วนที่เหลือ</td>
+      <td class="computed" id="p3-amt">—</td>
+      <td><input type="date" id="p3-date" oninput="saveData()"></td>
+      <td>
+        <select id="p3-status" onchange="saveData()">
+          <option value="">— เลือกสถานะ —</option>
+          <option value="paid">✅ ชำระแล้ว</option>
+          <option value="unpaid">⏳ รอชำระ</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- PAYMENT CHANNELS -->
+<div class="pay-channels">
+  <h4>ช่องทางการชำระเงิน</h4>
+  1. เงินสด<br>
+  2. โอนเงิน — ธนาคารไทยพาณิชย์ (SCB)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;ชื่อบัญชี <strong>น.ส.วลัยวรรณ เกิดเมืองเล็ก</strong><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;เลขที่บัญชี <strong>513-275971-1</strong> สาขาทุ่งสง
+</div>
+
+<!-- FOOTER SIGNATURES -->
+<div class="doc-footer">
+  <div class="sig-box">
+    <div class="sig-line"></div>
+    <div class="sig-label">ผู้เสนอราคา / Authorized Signature</div>
+    <div class="sig-date">วันที่ <input type="date" id="sig1-date" oninput="saveData()"></div>
+  </div>
+  <div class="sig-box">
+    <div class="sig-line"></div>
+    <div class="sig-label">ผู้รับใบเสนอราคา / Customer Signature</div>
+    <div class="sig-date">วันที่ <input type="date" id="sig2-date" oninput="saveData()"></div>
+  </div>
+</div>
+
+</div><!-- /doc-inner -->
+</div><!-- /doc -->
+</div><!-- /page-wrap -->
+
+<script>
+// ---- DATA ----
+let rows = [];
+let rowId = 0;
+
+function fmt(n){
+  if(isNaN(n)||n===null)return'0.00';
+  return Number(n).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function parseNum(s){
+  if(!s)return 0;
+  return parseFloat(String(s).replace(/,/g,''))||0;
+}
+
+// ---- BAHT TEXT ----
+function numToThai(n){
+  const units=['','หนึ่ง','สอง','สาม','สี่','ห้า','หก','เจ็ด','แปด','เก้า'];
+  const digits=['','สิบ','ร้อย','พัน','หมื่น','แสน','ล้าน'];
+  if(n===0)return'ศูนย์';
+  let result='';
+  const s=Math.abs(Math.round(n*100));
+  const satang=s%100;
+  const baht=Math.floor(s/100);
+  function toThai(num){
+    if(num===0)return'';
+    if(num<10)return units[num];
+    let r='';
+    const arr=String(num).split('').reverse();
+    for(let i=0;i<arr.length;i++){
+      const d=parseInt(arr[i]);
+      if(d===0)continue;
+      if(i===1&&d===2)r=(units[1]+digits[1])+r;
+      else if(i===1&&d===1)r=digits[1]+r;
+      else r=(units[d]+digits[i])+r;
+    }
+    return r;
+  }
+  if(baht>0)result+=toThai(baht)+'บาท';
+  if(satang>0)result+=toThai(satang)+'สตางค์';
+  else result+='ถ้วน';
+  return result;
+}
+
+// ---- ROWS ----
+function addRow(){
+  const id=++rowId;
+  rows.push({id,desc:'',qty:1,price:0,imgData:null});
+  renderRows();
+}
+
+function deleteRow(i){
+  rows.splice(i,1);
+  renderRows();
+}
+
+function renderRows(){
+  const tbody=document.getElementById('items-body');
+  tbody.innerHTML='';
+  rows.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${i+1}</td>
+      <td>
+        <textarea rows="2" placeholder="ระบุรายละเอียดสินค้า/บริการ" oninput="rows[${i}].desc=this.value;saveData()">${r.desc}</textarea>
+        <div class="img-wrap" id="imgwrap-${r.id}">
+          ${r.imgData?`<img class="row-img" src="${r.imgData}"><br>`:''}
+          <label class="img-lbl">📎 แนบรูปภาพ
+            <input class="img-input" type="file" accept="image/*" onchange="handleImg(event,${i})">
+          </label>
+          ${r.imgData?`<span class="img-lbl" onclick="removeImg(${i})" style="color:#c00"> ✕ ลบรูป</span>`:''}
+        </div>
+      </td>
+      <td class="num"><input type="number" min="1" value="${r.qty}" oninput="rows[${i}].qty=parseFloat(this.value)||0;updateRow(${i})"></td>
+      <td class="price"><input type="number" min="0" step="0.01" value="${r.price||''}" placeholder="0.00" oninput="rows[${i}].price=parseFloat(this.value)||0;updateRow(${i})"></td>
+      <td class="total" id="row-total-${r.id}">${fmt(r.qty*r.price)}</td>
+      <td class="act"><button class="del-btn no-print" onclick="deleteRow(${i})" title="ลบ">✕</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  calcAll();
+}
+
+function updateRow(i){
+  const r=rows[i];
+  const el=document.getElementById('row-total-'+r.id);
+  if(el)el.textContent=fmt(r.qty*r.price);
+  calcAll();
+  saveData();
+}
+
+function handleImg(e,i){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    rows[i].imgData=ev.target.result;
+    renderRows();
+    saveData();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeImg(i){
+  rows[i].imgData=null;
+  renderRows();
+  saveData();
+}
+
+// ---- CALC ----
+function calcAll(){
+  const total=rows.reduce((s,r)=>s+r.qty*r.price,0);
+  document.getElementById('grand-total').textContent=fmt(total)+' บาท';
+  document.getElementById('baht-text').textContent='('+numToThai(total)+')';
+  calcPayments(total);
+}
+
+function calcPayments(totalOverride){
+  const total=totalOverride!==undefined?totalOverride:rows.reduce((s,r)=>s+r.qty*r.price,0);
+  const dep=parseNum(document.getElementById('deposit-amt').value);
+  const p2=total>0?(total-dep)/2:0;
+  const p3=total>0?total-dep-p2:0;
+  document.getElementById('p1-amt').textContent=dep>0?fmt(dep)+' บาท':'—';
+  document.getElementById('p2-amt').textContent=total>0?fmt(p2)+' บาท':'—';
+  document.getElementById('p3-amt').textContent=total>0?fmt(p3)+' บาท':'—';
+}
+
+// ---- PERSIST ----
+function saveData(){
+  const state={
+    qtNo:v('qt-no'),qtDate:v('qt-date'),
+    cName:v('c-name'),cPhone:v('c-phone'),cAddr:v('c-addr'),
+    cWdate:v('c-wdate'),cVenue:v('c-venue'),cTime:v('c-time'),
+    depositAmt:v('deposit-amt'),
+    p1Date:v('p1-date'),p1Status:v('p1-status'),
+    p2Date:v('p2-date'),p2Status:v('p2-status'),
+    p3Date:v('p3-date'),p3Status:v('p3-status'),
+    sig1Date:v('sig1-date'),sig2Date:v('sig2-date'),
+    rows:rows.map(r=>({...r,imgData:null})) // skip img in storage
+  };
+  try{localStorage.setItem('ww_qt',JSON.stringify(state));}catch(e){}
+}
+
+function loadData(){
+  try{
+    const raw=localStorage.getItem('ww_qt');
+    if(!raw)return;
+    const s=JSON.parse(raw);
+    sv('qt-no',s.qtNo);sv('qt-date',s.qtDate);
+    sv('c-name',s.cName);sv('c-phone',s.cPhone);sv('c-addr',s.cAddr);
+    sv('c-wdate',s.cWdate);sv('c-venue',s.cVenue);sv('c-time',s.cTime);
+    sv('deposit-amt',s.depositAmt);
+    sv('p1-date',s.p1Date);sv('p1-status',s.p1Status);
+    sv('p2-date',s.p2Date);sv('p2-status',s.p2Status);
+    sv('p3-date',s.p3Date);sv('p3-status',s.p3Status);
+    sv('sig1-date',s.sig1Date);sv('sig2-date',s.sig2Date);
+    if(s.rows&&s.rows.length){
+      rows=s.rows;
+      rowId=Math.max(...rows.map(r=>r.id),0);
+      renderRows();
+    }
+  }catch(e){}
+}
+
+function resetForm(){
+  if(!confirm('ล้างข้อมูลทั้งหมดใช่หรือไม่?'))return;
+  try{localStorage.removeItem('ww_qt');}catch(e){}
+  rows=[];rowId=0;
+  ['qt-no','qt-date','c-name','c-phone','c-addr','c-wdate','c-venue','c-time','p1-date','p2-date','p3-date','sig1-date','sig2-date'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.value='';
+  });
+  document.getElementById('deposit-amt').value='20,000';
+  ['p1-status','p2-status','p3-status'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.selectedIndex=0;
+  });
+  renderRows();
+}
+
+function v(id){const el=document.getElementById(id);return el?el.value:'';}
+function sv(id,val){const el=document.getElementById(id);if(el&&val!==undefined)el.value=val;}
+
+// ---- INIT ----
+window.addEventListener('DOMContentLoaded',()=>{
+  const today=new Date();
+  const pad=n=>String(n).padStart(2,'0');
+  const td=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
+  document.getElementById('qt-date').value=td;
+  document.getElementById('qt-no').value='QA-'+today.getFullYear().toString().slice(-2)+pad(today.getMonth()+1)+'001';
+  loadData();
+  if(rows.length===0){addRow();addRow();addRow();}
+  calcAll();
+});
+</script>
+</body>
+</html>
