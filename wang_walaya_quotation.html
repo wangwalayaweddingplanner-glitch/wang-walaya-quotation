@@ -453,37 +453,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 }
 </style>
 
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, query, orderBy }
-  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBlUo-v6cvVlcRJMuS-QA4z7y7h2D1ZIzs",
-  authDomain: "wang-walaya-quatation.firebaseapp.com",
-  projectId: "wang-walaya-quatation",
-  storageBucket: "wang-walaya-quatation.firebasestorage.app",
-  messagingSenderId: "972229537194",
-  appId: "1:972229537194:web:fd29a15d0da4cea8f7cfd3"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db  = getFirestore(app);
-
-// Wait for regular script to be ready, then init auth
-function waitAndInit(){
-  if(typeof window._appReady === 'function'){
-    window._appReady({auth,db,signInWithEmailAndPassword,signOut,
-      onAuthStateChanged,collection,doc,setDoc,getDocs,deleteDoc,query,orderBy});
-  } else {
-    setTimeout(waitAndInit, 50);
-  }
-}
-waitAndInit();
-</script>
 </head>
 <body>
 
@@ -836,34 +806,13 @@ function numToThai(n){
 }
 
 // ====================================================
-//  AUTH
+//  AUTH — handled in module script below
 // ====================================================
-async function doLogin(){
-  const email = document.getElementById('login-email').value.trim();
-  const pass  = document.getElementById('login-pass').value;
-  const btn   = document.getElementById('login-btn');
-  const err   = document.getElementById('login-err');
-  err.textContent = '';
-  btn.textContent = 'กำลังเข้าสู่ระบบ…';
-  btn.disabled = true;
-  try {
-    const {auth, signInWithEmailAndPassword} = window._fb;
-    await signInWithEmailAndPassword(auth, email, pass);
-  } catch(e) {
-    err.textContent = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
-    btn.textContent = 'เข้าสู่ระบบ';
-    btn.disabled = false;
-  }
-}
-
 document.addEventListener('keydown', e => {
-  if(e.key==='Enter' && document.getElementById('login-overlay').style.display!=='none') doLogin();
+  if(e.key==='Enter' && document.getElementById('login-overlay').style.display!=='none'){
+    if(window.doLogin) window.doLogin();
+  }
 });
-
-function doLogout(){
-  if(!confirm('ออกจากระบบใช่หรือไม่?')) return;
-  window._fb.signOut(window._fb.auth);
-}
 
 // ====================================================
 //  IMAGE COMPRESS
@@ -1053,7 +1002,7 @@ function onFieldChange(){updateTopbar();dirtyFlag=true;}
 // ====================================================
 //  FIREBASE DB
 // ====================================================
-async function loadAllDocs(){
+window.loadAllDocs = async function loadAllDocs(){
   const {db, collection, getDocs, query, orderBy} = window._fb;
   try{
     const q = query(collection(db,'quotations'), orderBy('updatedAt','desc'));
@@ -1175,7 +1124,7 @@ async function deleteDoc(id,e){
   }catch(e2){alert('ลบไม่สำเร็จ: '+e2.message);}
 }
 
-function newDoc(){
+window.newDoc = function newDoc(){
   if(dirtyFlag&&rows.length){if(!confirm('มีการแก้ไขที่ยังไม่บันทึก ต้องการออกใช่หรือไม่?'))return;}
   currentDocId=null;rows=[];rowId=0;
   const t=new Date(),p=n=>String(n).padStart(2,'0');
@@ -1225,30 +1174,74 @@ const v=id=>{const e=document.getElementById(id);return e?e.value:''};
 const sv=(id,val)=>{const e=document.getElementById(id);if(e&&val!==undefined)e.value=val};
 
 // ====================================================
-//  INIT — called by Firebase module when ready
+//  INIT
 // ====================================================
-window._appReady = function(fb){
-  window._fb = fb;
-  const {auth, onAuthStateChanged} = fb;
-  onAuthStateChanged(auth, async user=>{
-    if(user){
-      currentUser = user;
-      document.getElementById('login-overlay').style.display='none';
-      document.getElementById('main-app').style.display='flex';
-      const userEl=document.getElementById('tb-user');
-      if(userEl) userEl.textContent=user.email;
-      await loadAllDocs();
-      newDoc();
-    } else {
-      currentUser = null;
-      document.getElementById('login-overlay').style.display='flex';
-      document.getElementById('main-app').style.display='none';
-    }
-  });
-};
-
 window.addEventListener('beforeunload',e=>{
   if(dirtyFlag){e.preventDefault();e.returnValue='';}
+});
+</script>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, query, orderBy }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBlUo-v6cvVlcRJMuS-QA4z7y7h2D1ZIzs",
+  authDomain: "wang-walaya-quatation.firebaseapp.com",
+  projectId: "wang-walaya-quatation",
+  storageBucket: "wang-walaya-quatation.firebasestorage.app",
+  messagingSenderId: "972229537194",
+  appId: "1:972229537194:web:fd29a15d0da4cea8f7cfd3"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const db   = getFirestore(fbApp);
+
+// expose for onclick handlers
+window._fb = {auth,db,signInWithEmailAndPassword,signOut,
+  collection,doc,setDoc,getDocs,deleteDoc,query,orderBy};
+
+// expose doLogin/doLogout to window (called from HTML onclick)
+window.doLogin = async function(){
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  const btn   = document.getElementById('login-btn');
+  const err   = document.getElementById('login-err');
+  err.textContent = '';
+  btn.textContent = 'กำลังเข้าสู่ระบบ…';
+  btn.disabled = true;
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e) {
+    err.textContent = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+    btn.textContent = 'เข้าสู่ระบบ';
+    btn.disabled = false;
+  }
+};
+
+window.doLogout = function(){
+  if(!confirm('ออกจากระบบใช่หรือไม่?')) return;
+  signOut(auth);
+};
+
+onAuthStateChanged(auth, async user=>{
+  if(user){
+    window._currentUser = user;
+    document.getElementById('login-overlay').style.display='none';
+    document.getElementById('main-app').style.display='flex';
+    const userEl=document.getElementById('tb-user');
+    if(userEl) userEl.textContent=user.email;
+    await window.loadAllDocs();
+    window.newDoc();
+  } else {
+    window._currentUser = null;
+    document.getElementById('login-overlay').style.display='flex';
+    document.getElementById('main-app').style.display='none';
+  }
 });
 </script>
 </body>
